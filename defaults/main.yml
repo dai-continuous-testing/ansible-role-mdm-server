@@ -1,0 +1,53 @@
+---
+
+required_modifiable_fields:
+  - app_version
+  - server_port
+  - installation_root_folder
+  - db_connection_string
+  - db_username
+  - db_password
+  - java_version
+  - custom_download_username
+  - custom_download_password
+
+app_name: mdm-server
+
+__app_version: 21.5.37
+
+__server_port: 443
+
+__java_version: 8u292-b10
+
+extra_java_options: []
+
+__db_connection_string: "jdbc:postgresql://localhost:5432/mdm-server"
+__db_username: postgres
+__db_password: ""
+
+base_application_properties:
+  - "server.port": "{{ server_port }}"
+  - "spring.datasource.url": "{{ db_connection_string }}"
+  - "spring.datasource.username": "{{ db_username }}"
+  - "spring.datasource.password": "{{ db_password }}"
+  - "spring.datasource.driver-class-name": "org.postgresql.Driver"
+
+extra_application_properties: {}
+
+application_properties: "{{ base_application_properties | combine(extra_application_properties) }}"
+
+start_after_install: True
+
+clear_temp_folder: False
+clear_before_install: False
+
+custom_download_url: ""
+
+cdn_name: "devops-artifacts.experitest.com"
+s3_download_url: "https://{{ cdn_name }}/{{ relative_path }}/{{ installer_file_name }}"
+
+java_download_url: "https://{{ cdn_name }}/{{ java_relative_path }}/{{ java_download_filename }}"
+
+#
+
+health_check_uri: "/actuator/health"

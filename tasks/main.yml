@@ -1,0 +1,35 @@
+---
+
+- name: validate vars
+  include_tasks: tasks/variables.yml
+  when: ansible_os_family|lower == "redhat"
+
+- name: install
+  include_tasks: "tasks/{{ ansible_os_family | os_family_to_os_type }}-install.yml"
+  when: 
+    - state|default('present') == 'present' 
+    - ansible_os_family|lower == "redhat"
+
+- name: clear temp folder
+  include_tasks: "tasks/{{ ansible_os_family | os_family_to_os_type }}-clear-temp.yml"
+  when: 
+    - state|default('present') == 'present' 
+    - ansible_os_family|lower == "redhat"
+  
+- name: track versions
+  include_tasks: "tasks/{{ ansible_os_family | os_family_to_os_type }}-track-versions.yml"
+  when: 
+    - state|default('present') == 'present' 
+    - ansible_os_family|lower == "redhat"
+
+- name: remove archived versions
+  include_tasks: "tasks/{{ ansible_os_family | os_family_to_os_type }}-remove-archived.yml"
+  when: 
+    - state|default('present') == 'present' 
+    - ansible_os_family|lower == "redhat"
+
+- name: uninstall
+  include_tasks: "tasks/{{ ansible_os_family | os_family_to_os_type }}-uninstall.yml"
+  when: 
+    - state|default('present') == 'present' 
+    - ansible_os_family|lower == "redhat"
