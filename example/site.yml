@@ -1,0 +1,8 @@
+
+- hosts: mdmserver
+
+  roles:
+    - role: mdm-server
+      db_connection_string: jdbc://postgres:5432/reporter
+      db_username: postgres
+      db_password: mysupersecurepassword

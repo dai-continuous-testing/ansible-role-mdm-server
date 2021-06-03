@@ -1,0 +1,4 @@
+
+- src: git+https://github.com/ExperitestOfficial/ansible-role-mdm-server.git
+  version: master
+  name: mdm-server
