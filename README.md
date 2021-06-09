@@ -20,10 +20,10 @@ Role Variables
 | server_port | port number for the server | number | 443 | no |
 | extra_application_properties | additional props to be override in application.properties file | dict | {} | no |
 | extra_application-encrypted_properties | additional props to be override in application-encrypted.properties file | dict | {} | no |
-| db_connection_string | connection string to postgres | string | jdbc:postgresql://localhost:5432/reporter | no |
+| db_connection_string | connection string to postgres | string | jdbc:postgresql://localhost:5432/mdmserver | no |
 | db_username | username for db connection | string | postgres | no |
 | db_password | password for db connection | string |  | yes |
-| installation_root_folder | the root folder in which the application will be installed under reporter-{version} folder | string | for linux: /opt/Experitest | no |
+| installation_root_folder | the root folder in which the application will be installed under mdmserver-{version} folder | string | for linux: /opt/Experitest | no |
 | java_version | java jre version to install | string | 8u292-b10 | no |
 | custom_download_url | custom url to download the installation from (zip format) | string |  | no |
 | custom_download_username | username to download from custom url on windows | string |  | no |
