@@ -9,7 +9,6 @@ service_name: "{{ app_name }}.service"
 
 service_file_path: "/etc/systemd/system/{{ service_name }}"
 
-# the windows zip supports on linux platform
 installer_file_name: "mdm-server{{ app_version }}-SNAPSHOT.zip"
 relative_path: "mdm-server/linux"
 
