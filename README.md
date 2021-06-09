@@ -19,6 +19,7 @@ Role Variables
 | app_version | application version to install | string | 21.5.37 | no |
 | server_port | port number for the server | number | 443 | no |
 | extra_application_properties | additional props to be override in application.properties file | dict | {} | no |
+| extra_application-encrypted_properties | additional props to be override in application-encrypted.properties file | dict | {} | no |
 | db_connection_string | connection string to postgres | string | jdbc:postgresql://localhost:5432/reporter | no |
 | db_username | username for db connection | string | postgres | no |
 | db_password | password for db connection | string |  | yes |

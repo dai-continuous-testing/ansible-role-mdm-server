@@ -8,6 +8,7 @@ required_modifiable_fields:
   - db_username
   - db_password
   - java_version
+  - encryptor_password
   - custom_download_username
   - custom_download_password
 
@@ -25,16 +26,25 @@ __db_connection_string: "jdbc:postgresql://localhost:5432/mdm-server"
 __db_username: postgres
 __db_password: ""
 
+__encryptor_password: "123456"
+
+# basic application properties
 base_application_properties:
   - "server.port": "{{ server_port }}"
-  - "spring.datasource.url": "{{ db_connection_string }}"
-  - "spring.datasource.username": "{{ db_username }}"
-  - "spring.datasource.password": "{{ db_password }}"
-  - "spring.datasource.driver-class-name": "org.postgresql.Driver"
 
 extra_application_properties: {}
 
 application_properties: "{{ base_application_properties | combine(extra_application_properties) }}"
+
+# encryted application properties
+base_application-encrypted_properties:
+  - "spring.datasource.url": "{{ db_connection_string }}"
+  - "spring.datasource.username": "{{ db_username }}"
+  - "spring.datasource.password": "{{ db_password }}"
+
+extra_application-encrypted_properties: {}
+
+application-encrypted_properties: "{{ base_application-encrypted_properties | combine(extra_application-encrypted_properties) }}"
 
 start_after_install: True
 
