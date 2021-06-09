@@ -130,9 +130,6 @@
     dest: "{{ installation_folder }}"
     remote_src: yes
     owner: "{{ ansible_user_id }}"
-    exclude:
-      - "*.bat"
-      - "*.exe"
   become: yes
   notify:
     - start the service
@@ -159,6 +156,14 @@
     line: "{{ item.key }}={{ item.value }}"
     regexp: "^{{ item.key | replace('.', '\\.') }}="
   with_dict: "{{ application_properties }}"
+  become: yes
+
+- name: update application-encrypted properties file
+  lineinfile:
+    path: "{{ installation_folder }}/application-encrypted.properties"
+    line: "{{ item.key }}={{ item.value }}"
+    regexp: "^{{ item.key | replace('.', '\\.') }}="
+  with_dict: "{{ application-encrypted_properties }}"
   become: yes
 
 

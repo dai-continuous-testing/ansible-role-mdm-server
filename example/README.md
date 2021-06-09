@@ -12,5 +12,3 @@ to use the example:
 
 - put the admin password and confirm
 
-## Known issues
-
