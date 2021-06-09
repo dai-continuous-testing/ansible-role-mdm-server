@@ -22,7 +22,7 @@ __java_version: 8u292-b10
 
 extra_java_options: []
 
-__db_connection_string: "jdbc:postgresql://localhost:5432/mdm-server"
+__db_connection_string: "jdbc:postgresql://localhost:5432/mdmserver"
 __db_username: postgres
 __db_password: ""
 
