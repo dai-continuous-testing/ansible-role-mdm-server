@@ -163,7 +163,7 @@
     path: "{{ installation_folder }}/application-encrypted.properties"
     line: "{{ item.key }}={{ item.value }}"
     regexp: "^{{ item.key | replace('.', '\\.') }}="
-  with_dict: "{{ application-encrypted_properties }}"
+  with_dict: "{{ application_encrypted_properties }}"
   become: yes
 
 

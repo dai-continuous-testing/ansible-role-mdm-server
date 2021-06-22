@@ -37,14 +37,14 @@ extra_application_properties: {}
 application_properties: "{{ base_application_properties | combine(extra_application_properties) }}"
 
 # encryted application properties
-base_application-encrypted_properties:
+base_application_encrypted_properties:
   - "spring.datasource.url": "{{ db_connection_string }}"
   - "spring.datasource.username": "{{ db_username }}"
   - "spring.datasource.password": "{{ db_password }}"
 
-extra_application-encrypted_properties: {}
+extra_application_encrypted_properties: {}
 
-application-encrypted_properties: "{{ base_application-encrypted_properties | combine(extra_application-encrypted_properties) }}"
+application_encrypted_properties: "{{ base_application_encrypted_properties | combine(extra_application_encrypted_properties) }}"
 
 start_after_install: True
 
