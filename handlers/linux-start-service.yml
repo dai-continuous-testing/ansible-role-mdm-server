@@ -8,10 +8,15 @@
   become: yes
 
 - name: wait for service to start
-  health_check:
-    url: "http://localhost:{{ health_check_port | default(server_port) }}{{ health_check_uri | default('/actuator/health') }}"
-    expected_status: "{{ health_check_status | default('200') }}"
-    max_retries: "{{ health_check_max_retries | default('20') }}"
+  uri:
+    url: "https://localhost:{{ health_check_port | default(server_port) }}{{ health_check_uri | default('/actuator/health') }}"
+    return_content: yes
+    validate_certs: false
+  register: _result
+  until: _result.status == 200
+  retries: 10
+  delay: 3
+  #failed_when: "'UP' not in _result.content"
 
 - name: get installed version from version.txt file
   slurp:
@@ -20,10 +25,10 @@
   
 - name: print installed version
   debug:
-    msg: " Installed version: {{ ((installed_version['content'] | b64decode).split(':')[1]).split('-')[0] }}"
+    msg: " Installed version: {{ ((installed_version['content'] | b64decode).split(':')[1] | trim).split('-')[0] }}"
 
 - name: fail if app_version is not equal to installed version
   fail:
-    msg: "app_version: {{ app_version }} does not macthed to installed version {{ ((installed_version['content'] | b64decode).split(':')[1]).split('-')[0] }}"
-  when: app_version != ((installed_version['content'] | b64decode).split(':')[1]).split('-')[0]
+    msg: "app_version: {{ app_version }} does not macthed to installed version {{ ((installed_version['content'] | b64decode).split(':')[1] | trim).split('-')[0] }}"
+  when: app_version != ((installed_version['content'] | b64decode).split(':')[1] | trim).split('-')[0]
   
