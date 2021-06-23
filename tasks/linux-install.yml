@@ -77,9 +77,8 @@
   become: yes
   ignore_errors: yes
 
-- name: fail if java is not found
-  fail:
-    msg: "java must be accesible in path {{ java_bin }}"
+- name: install java if not found
+  include_tasks: tasks/linux-java-install.yml
   when: java_test.rc != 0
 
 # download the file

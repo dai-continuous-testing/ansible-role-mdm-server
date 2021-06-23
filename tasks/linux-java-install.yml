@@ -1,0 +1,72 @@
+# validation
+
+- name: assert all vars are set
+  assert: { that: "{{ item }} != '' " }
+  with_items:
+  - java_version
+  - temp_folder
+  - java_download_filename
+  - java_download_url
+  - java_installation_folder
+  - java_bin
+
+
+# validate if installed
+
+- name: Check if java exists
+  stat:
+    path: "{{ java_bin }}"
+  register: java_exists
+
+# install java
+
+- name: install java if not exist
+  block:
+
+    - name: download java from s3 url
+      get_url:
+        url: "{{ java_download_url }}"
+        dest: "{{ temp_folder }}/{{ java_download_filename }}"
+        timeout: "{{ download_timeout | default(60) }}"
+    
+    - name: make sure java installation folder exists
+      file:
+        path: "{{ java_installation_folder }}"
+        state: directory
+        owner: "{{ ansible_user_id }}"
+      become: yes
+    
+    - name: unzip java file
+      command: "tar -xzvf {{ temp_folder }}/{{ java_download_filename }} -C {{ java_installation_folder }}"
+      args:
+        creates: "{{ java_bin }}"
+      become: yes
+      register: unzip_java
+      ignore_errors: yes
+    
+    - name: sleep for 25 seconds if unzip java fails
+      pause:
+        seconds: 25
+      when: unzip_java.rc != 0
+
+    - name: rerun - unzip java file if first fails
+      command: "tar -xzvf {{ temp_folder }}/{{ java_download_filename }} -C {{ java_installation_folder }}"
+      args:
+        creates: "{{ java_bin }}"
+      become: yes
+      when: unzip_java.rc != 0
+
+
+  when: not java_exists.stat.exists
+
+# validate java
+
+- name: make sure java is successfully installed on the machine
+  command: "{{ java_bin }} -version"
+  register: java_test
+  ignore_errors: yes
+
+- name: fail if java is not found
+  fail:
+    msg: java must be accesible in path
+  when: java_test.rc != 0
