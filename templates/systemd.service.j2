@@ -2,13 +2,7 @@
 [Unit]
 Description={{ app_name }} service
 
-StartLimitIntervalSec=500
-StartLimitBurst=5
-
 [Service]
-Restart=on-failure
-RestartSec=5s
-
 WorkingDirectory={{ installation_folder }}
 ExecStart={{ installation_folder }}/{{ launcher_file_name }}
 
