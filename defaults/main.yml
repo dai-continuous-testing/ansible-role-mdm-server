@@ -23,7 +23,7 @@ __java_version: 11.0.11_9
 extra_java_options: []
 
 __db_connection_string: "jdbc:postgresql://localhost:5432/mdmserver"
-__db_username: postgres
+__db_username: postgresql
 __db_password: ""
 
 __encryptor_password: "123456"
@@ -31,6 +31,8 @@ __encryptor_password: "123456"
 # basic application properties
 base_application_properties:
   - "server.port": "{{ server_port }}"
+  - "server.ssl.key-store": "{{ installation_folder }}/{{ certificate_file_name }}"
+  - "pushcertificate.p12.path": "{{ installation_folder }}/{{ push_certificate_name }}"
 
 extra_application_properties: {}
 
