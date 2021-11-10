@@ -14,7 +14,7 @@ required_modifiable_fields:
 
 app_name: mdmserver
 
-__app_version: 21.5.37
+__app_version: 21.5.47
 
 __server_port: 443
 
