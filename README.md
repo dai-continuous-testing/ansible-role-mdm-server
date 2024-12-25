@@ -23,7 +23,7 @@ Role Variables
 | db_username | username for db connection | string | postgres | no |
 | db_password | password for db connection | string |  | yes |
 | installation_root_folder | the root folder in which the application will be installed under mdmserver-{version} folder | string | for linux: /opt/Experitest | no |
-| java_version | java jre version to install | string | 11.0.11_9 | no |
+| java_version | java jre version to install | string | 17.0.3_7 | no |
 | custom_download_url | custom url to download the installation from (zip format) | string |  | no |
 | custom_download_username | username to download from custom url on windows | string |  | no |
 | custom_download_password | password to download from custom url on windows | string |  | no |
