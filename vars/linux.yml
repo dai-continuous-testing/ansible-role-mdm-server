@@ -20,7 +20,7 @@ java_relative_path: "java/linux"
 
 java_installation_folder: "{{ installation_root_folder }}/jre"
 
-java_home: "{{ java_installation_folder }}/jdk-{{ java_version }}-jre"
+java_home: "{{ java_installation_folder }}/jdk{{ java_version }}-jre"
 
 java_bin: "{{ java_home }}/bin/java"
 
