@@ -1,8 +1,12 @@
 # validation
 
 - name: assert all vars are set
-  assert: { that: "{{ item }} != '' " }
-  with_items:
+  assert: 
+    that:
+      - item is defined
+      - item | length > 0
+    quiet: true
+  loop:
   - java_version
   - temp_folder
   - java_download_filename
