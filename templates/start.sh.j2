@@ -6,5 +6,6 @@ JAVA_BIN={{ java_bin }}
 $JAVA_BIN -jar  \
 -Djasypt.encryptor.password={{encryptor_password}} \
 -Dlogging.config=./logback-spring.xml \
+{{ extra_java_options | join(' ') }} \
 ./mdm-server-{{app_version}}-SNAPSHOT.jar
 
