@@ -6,8 +6,10 @@ JAVA_BIN={{ java_bin }}
 $JAVA_BIN -jar  \
 -Djasypt.encryptor.password={{encryptor_password}} \
 -Dlogging.config=./logback-spring.xml \
+# extra_java_options: optional list of additional JVM options to pass to the Java process.
+# Type: list of strings; Default: [] (no extra options).
 {% if extra_java_options | length > 0 %}
-{{ extra_java_options | join(' ') }} \
+{{ extra_java_options | map('quote') | join(' ') }} \
 {% endif %}
 ./mdm-server-{{app_version}}-SNAPSHOT.jar
 
