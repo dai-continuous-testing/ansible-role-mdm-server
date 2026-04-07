@@ -3,8 +3,11 @@
 #JAVA_PATH=$(/usr/libexec/java_home -v 1.8)
 JAVA_BIN={{ java_bin }}
 
-$JAVA_BIN -jar  \
+$JAVA_BIN \
 -Djasypt.encryptor.password={{encryptor_password}} \
 -Dlogging.config=./logback-spring.xml \
-./mdm-server-{{app_version}}-SNAPSHOT.jar
+{% if extra_java_options | length > 0 %}
+{{ extra_java_options | map('quote') | join(' ') }} \
+{% endif %}
+-jar ./mdm-server-{{app_version}}-SNAPSHOT.jar
 
