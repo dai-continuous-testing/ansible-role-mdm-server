@@ -6,8 +6,8 @@ JAVA_BIN={{ java_bin }}
 $JAVA_BIN \
 -Djasypt.encryptor.password={{encryptor_password}} \
 -Dlogging.config=./logback-spring.xml \
-{% if extra_java_options | length > 0 %}
-{{ extra_java_options | map('quote') | join(' ') }} \
+{% if java_options | length > 0 %}
+{{ java_options | map('quote') | join(' ') }} \
 {% endif %}
 -jar ./mdm-server-{{app_version}}-SNAPSHOT.jar
 
