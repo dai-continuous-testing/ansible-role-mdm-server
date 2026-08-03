@@ -18,7 +18,7 @@ __app_version: 26.3.243
 
 __server_port: 443
 
-__java_version: 17.0.18_8
+__java_version: 25.0.4_7
 
 # OpenTelemetry Configuration
 otel_enabled: false
